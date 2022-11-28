@@ -1,0 +1,15 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env", //转es
+      {
+        "useBuiltIns": "usage",//按需加载
+        "debug": false,
+        "corejs": { "version": "3.8", "proposals": true }//指示全局版本的core-js的使用，添加proposals: true来实现提案中的特性 
+      }
+    ],
+    "@babel/preset-react", //转tsx
+    "@babel/preset-typescript" //转ts
+  ],
+  // "compact": true
+}

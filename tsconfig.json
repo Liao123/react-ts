@@ -1,0 +1,15 @@
+// 这里我们设置一个基本的配置来支持 JSX，并将 TypeScript 编译到 ES5……
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": false,//any 的情况下不发警告
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    // "include": [
+      // "./src/**/*"   // 读取所有可识别的src目录下的文件（通过include）。
+    // ],
+  }
+}
