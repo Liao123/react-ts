@@ -3,13 +3,14 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": false,//any 的情况下不发警告
-    "module": "es6",
+    "module": "es2022",
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node",
-    // "include": [
-      // "./src/**/*"   // 读取所有可识别的src目录下的文件（通过include）。
-    // ],
+    //解决了 import 自定义文件的声明问题
+    "paths": {
+      "@/*": ["./src/*"] // 路径映射，相对于baseUrl webpack声明别名 这里也要同步 不然ts解析不能识别
+    }
   }
 }

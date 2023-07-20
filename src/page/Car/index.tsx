@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./index.less";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export interface Props {
   enthusiasmLevel?: number;
 }
 
-function Hello({ enthusiasmLevel = 1 }: Props) {
+function Car({ enthusiasmLevel = 1 }: Props) {
   useEffect(() => {
     console.log(11121122121, process.env.NODE_ENV);
   });
@@ -16,10 +16,9 @@ function Hello({ enthusiasmLevel = 1 }: Props) {
   }
 
   return (
-    <div className="hello">
+    <div className="Car">
       <div className="greeting color-red">
-        Hello {getExclamationMarks(enthusiasmLevel)}
-        <Outlet />
+        car
         <img
           style={{ width: "100px" }}
           src={require("@/static/img/empty.png")}
@@ -27,10 +26,10 @@ function Hello({ enthusiasmLevel = 1 }: Props) {
         <nav>
           <ul>
             <li>
-              <Link to={`..`}>去hello</Link>
+              <Link to={`/hello`}>去hello</Link>
             </li>
             <li>
-              <a href={`/contacts`}>Your Friend</a>
+              <a href={`/contacts/2`}>Your Friend</a>
             </li>
           </ul>
         </nav>
@@ -39,10 +38,4 @@ function Hello({ enthusiasmLevel = 1 }: Props) {
   );
 }
 
-export default Hello;
-
-// helpers
-
-function getExclamationMarks(numChars: number) {
-  return Array(numChars + 1).join("!");
-}
+export default Car;

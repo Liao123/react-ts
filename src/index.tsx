@@ -1,21 +1,26 @@
-import ReactDOM from 'react-dom/client'
-import React from 'react';
-import Hello from './page/hello';
-const Game = ()=> {
-    return (
-      <div className="game">
-        <div className="game-board">
-        </div>
-        <div className="game-info">
-          <div>1{/* status */}</div>
-          <ol>4{/* TODO */}</ol>
-          <Hello name="hello 廖龙飞"></Hello>
-        </div>
-      </div>
-    );
-}
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import route from "@/router";
+import React, { Suspense } from "react";
+import Hello from "./page/Hello";
+import Car from "./page/Car";
+
+const router = createBrowserRouter([...route], {
+  basename: "/", //域名后面接什么文件夹（不是根目录）
+});
+
+const App = () => {
+  return (
+    // 报错组件 主要是自动发出 被弃用api的警告
+    <React.StrictMode>
+      <Suspense fallback={<div>Loading...</div>}>
+        <RouterProvider router={router}></RouterProvider>
+      </Suspense>
+    </React.StrictMode>
+  );
+};
 
 // ========================================
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Game />);
+root.render(<App />);
