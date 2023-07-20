@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./index.less";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 export interface Props {
   enthusiasmLevel?: number;
