@@ -8,6 +8,7 @@
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node",
+    "allowSyntheticDefaultImports":true, // 关闭 export = 警告
     //解决了 import 自定义文件的声明问题
     "paths": {
       "@/*": ["./src/*"] // 路径映射，相对于baseUrl webpack声明别名 这里也要同步 不然ts解析不能识别

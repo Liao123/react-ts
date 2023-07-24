@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import store from "./store";
+import { Provider } from "react-redux";
 
 function APP() {
   useEffect(() => {
@@ -9,7 +11,9 @@ function APP() {
   return (
     <div className="App">
       这是APP
-      <Outlet />
+      <Provider store={store}>
+        <Outlet />
+      </Provider>
     </div>
   );
 }
