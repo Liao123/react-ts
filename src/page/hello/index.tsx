@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./index.less";
 import { Link, Outlet } from "react-router-dom";
-
+import { Button } from "antd";
+import { DatePicker, Space } from "antd";
 export interface Props {
   enthusiasmLevel?: number;
 }
@@ -9,6 +10,7 @@ export interface Props {
 function Hello({ enthusiasmLevel = 1 }: Props) {
   useEffect(() => {
     console.log(11121122121, process.env.NODE_ENV);
+    console.log("NODE_ENV", process.env.NODE_ENV);
   });
 
   if (enthusiasmLevel <= 0) {
@@ -20,6 +22,14 @@ function Hello({ enthusiasmLevel = 1 }: Props) {
       <div className="greeting color-red">
         Hello {getExclamationMarks(enthusiasmLevel)}
         <Outlet />
+        <Button type="primary">Button</Button>
+        <Space direction="vertical">
+          <DatePicker />
+          <DatePicker picker="week" />
+          <DatePicker picker="month" />
+          <DatePicker picker="quarter" />
+          <DatePicker picker="year" />
+        </Space>
         <img
           style={{ width: "100px" }}
           src={require("@/static/img/empty.png")}
@@ -27,7 +37,7 @@ function Hello({ enthusiasmLevel = 1 }: Props) {
         <nav>
           <ul>
             <li>
-              <Link to={`..`}>回hello</Link>
+              <Link to={`..`}>回hello2</Link>
             </li>
             <li>
               <a href={`/contacts`}>Your Friend</a>

@@ -10,6 +10,9 @@
     ],
     "@babel/preset-react", //转tsx
     "@babel/preset-typescript" //转ts
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }]
   ]
   // "compact": true
 }

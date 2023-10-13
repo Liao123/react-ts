@@ -5,7 +5,7 @@ const webpack = require("webpack");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 module.exports = merge(base, {
   mode: "development",
-  devtool: "inline-source-map", //完全显示源码
+  devtool: "inline-source-map", //完全显示源码 eval-cheap-module-source-map
   devServer: {
     proxy: {
       "/api": {

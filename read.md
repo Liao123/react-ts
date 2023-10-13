@@ -5,6 +5,9 @@
 used-loader:
 css-loader --- 编译 css
 style-loader --- 移动 css-loader 编译好的到 html 的 style 里面
+postcss-loader：处理css时自动加前缀
+autoprefixer：决定添加哪些浏览器前缀到css中
+
 @babel/preset-react --- babel 预设一系列列 jsx 编译 用到的组合 //https://www.babeljs.cn/docs/
 @babel/preset-env --- es5+ 转 es5
 @babel/core --- 编译 js 用的 比如把 ast 类型的 js 转成能运行的 js //@babel/core 是 babel 对 core-js 的高级封装 webpack 内部用的 不装会提示你

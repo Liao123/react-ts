@@ -14,7 +14,7 @@ module.exports = {
   },
   resolve: {
     //解析器
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: [".jsx", ".tsx", ".ts", ".js"],
     alias: {
       "@": path.resolve(__dirname, "../src"),
     },
@@ -24,27 +24,30 @@ module.exports = {
       {
         test: /\.(t|j)sx?/,
         // exclude: /(node_modules|bower_components)/,
-        include: path.resolve(__dirname, "../src"), //编译范围缩小到src
-        use: ["babel-loader"],
+        include: [path.resolve(__dirname, "../src")], //编译范围缩小到src
+        use: ["thread-loader", "babel-loader"],
       },
       {
-        test: /\.css$/i,
+        test: /.(css|less)$/,
+        include: [path.resolve(__dirname, "../src")],
         use: [
-          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          devMode ? "style-loader" : "style-loader", //MiniCssExtractPlugin.loader,
           "css-loader",
-        ],
-      },
-      {
-        test: /\.less$/i,
-        use: [
-          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
-          "css-loader",
+          "postcss-loader",
           "less-loader",
         ],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource", //asset/resource（对应file-loader）、asset/inline（对应url-loader）、asset/source（对应raw-loader）、asset。
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 小于10kb转base64位
+          },
+        },
+        generator: {
+          filename: "static/img/[name][ext]", // 文件输出目录和命名
+        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -58,6 +61,18 @@ module.exports = {
         test: /\.xml$/i,
         use: ["xml-loader"],
       },
+      {
+        test: /.(mp4|webm|ogg|mp3|wav|flac|aac)$/, // 匹配媒体文件
+        type: "asset", // type选择asset
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024, // 小于10kb转base64位
+          },
+        },
+        generator: {
+          filename: "static/media/[name][ext]", // 文件输出目录和命名
+        },
+      },
     ],
   },
   plugins: [
@@ -68,9 +83,12 @@ module.exports = {
       inject: "body", //选择打包的js插入的标签
       inject: true, //自动注入静态资源
     }),
-    new MiniCssExtractPlugin({
-      //抽离css
-      filename: "index.bundle.css", // 输出的 css 文件名为 index.css
-    }),
+    // new MiniCssExtractPlugin({
+    //   //抽离css
+    //   filename: "index.bundle.css", // 输出的 css 文件名为 index.css
+    // }),
   ],
+  cache: {
+    type: "filesystem", // 使用文件缓存
+  },
 };

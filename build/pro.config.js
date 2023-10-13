@@ -14,16 +14,20 @@ const CssMinimizerWebpackPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = merge(base, {
   mode: "production", // 生产模式,会开启tree-shaking和压缩代码,以及其他优化
-  devtool: "source-map",
+  // devtool: "source-map",
   module: {
     rules: [],
   },
   //使用cdn引入的模块声明可以用的变量名 配合cdn使用
   externals: {
-    react: "React",
-    "react-dom": "ReactDOM",
-    "react-router-dom": "ReactRouterDom",
-    axios: "axios",
+    // react: "React",
+    // "react-dom": "ReactDOM",
+    // "react-router-dom": "ReactRouterDom",
+    // axios: "axios",
+  },
+  performance: {
+    hints: false, //"warning", // 或 "error"
+    maxAssetSize: 244 * 1024, // 限制文件大小为244 KiB
   },
   optimization: {
     moduleIds: "deterministic", //vendor哈希值应该在构建之间保持一致
@@ -38,21 +42,27 @@ module.exports = merge(base, {
       enforceSizeThreshold: 50000, //强制执行拆分的体积阈值和其他限制
       cacheGroups: {
         //缓存
-        // defaultVendors: {
-        //   test: /[\\/]node_modules[\\/]/,
-        //   priority: -10,
-        //   reuseExistingChunk: true,
-        // },
-        // vendor: {//将第三方库（例如lodashor react）提取到单独的vendor块中
-        //   test: /[\\/]node_modules[\\/]/,
-        //   name: 'vendors',
-        //   chunks: 'all',
-        // },
+        react: {
+          // 优先级
+          priority: 20,
+          test: /[\\/]node_modules[\\/](react|react-router-dom|react-redux|react-dom)[\\/]/,
+          name: "react",
+          chunks: "all",
+        },
+        //公共js
         default: {
-          //非第三方库 复用用 也拆
-          minChunks: 2,
+          name: "common",
+          chunks: "initial",
+          minChunks: 2, //模块被引用2次以上的才抽离
           priority: -20,
           reuseExistingChunk: true,
+        },
+        vendors: {
+          //拆分第三方库（通过npm|yarn安装的库）
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+          chunks: "initial",
+          priority: -10,
         },
       },
     },
@@ -77,37 +87,37 @@ module.exports = merge(base, {
   },
   plugins: [
     new ProgressBarPlugin(),
-    new WebpackCdnPlugin({
-      modules: [
-        {
-          name: "react",
-          var: "React",
-          prod: true,
-          prodUrl:
-            "//unpkg.zhimg.com/react@16.14.0/umd/react.production.min.js",
-        },
-        {
-          name: "react-dom",
-          var: "ReactDOM",
-          prod: true,
-          prodUrl:
-            "//unpkg.zhimg.com/react-dom@16.14.0/umd/react-dom.production.min.js",
-        },
-        {
-          name: "react-router-dom",
-          var: "ReactRouterDOM",
-          prod: true,
-          prodUrl:
-            "//unpkg.zhimg.com/react-router-dom@5.2.0/umd/react-router-dom.min.js",
-        },
-        {
-          name: "axios",
-          var: "axios",
-          prod: true,
-          prodUrl: "//unpkg.zhimg.com/axios@0.20.0/dist/axios.min.js",
-        },
-      ],
-    }),
+    // new WebpackCdnPlugin({
+    //   modules: [
+    //     {
+    //       name: "react",
+    //       var: "React",
+    //       prod: true,
+    //       prodUrl:
+    //         "//unpkg.zhimg.com/react@16.14.0/umd/react.production.min.js",
+    //     },
+    //     {
+    //       name: "react-dom",
+    //       var: "ReactDOM",
+    //       prod: true,
+    //       prodUrl:
+    //         "//unpkg.zhimg.com/react-dom@16.14.0/umd/react-dom.production.min.js",
+    //     },
+    //     {
+    //       name: "react-router-dom",
+    //       var: "ReactRouterDOM",
+    //       prod: true,
+    //       prodUrl:
+    //         "//unpkg.zhimg.com/react-router-dom@5.2.0/umd/react-router-dom.min.js",
+    //     },
+    //     {
+    //       name: "axios",
+    //       var: "axios",
+    //       prod: true,
+    //       prodUrl: "//unpkg.zhimg.com/axios@0.20.0/dist/axios.min.js",
+    //     },
+    //   ],
+    // }),
     new CopyWebpackPlugin({
       patterns: [
         {
