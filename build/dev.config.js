@@ -14,6 +14,7 @@ module.exports = merge(base, {
         pathRewrite: { "^/api": "" },
       },
     },
+    compress: false, // gzip压缩,开发环境不开启,提升热更新速度
     static: {
       //可以是数组
       directory: path.resolve(__dirname, "../public"), //指定静态文件去哪拿

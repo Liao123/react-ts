@@ -27,7 +27,7 @@ function Hello({ enthusiasmLevel = 1 }: Props) {
         <nav>
           <ul>
             <li>
-              <Link to={`..`}>去hello</Link>
+              <Link to={`..`}>回hello</Link>
             </li>
             <li>
               <a href={`/contacts`}>Your Friend</a>

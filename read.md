@@ -1,5 +1,6 @@
 了解有哪些插件及 loader 配合 babel 官网 react 主要由 babel-loader 提供编译：
 官网地址：https://webpack.docschina.org/loaders/#files
+参考https://juejin.cn/post/7111922283681153038#heading-4
 
 used-loader:
 css-loader --- 编译 css

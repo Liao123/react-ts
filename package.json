@@ -9,7 +9,8 @@
   "scripts": {
     "build-t": "tsc",
     "build": "env-cmd -f .env.pro webpack --config ./build/pro.config.js",
-    "start": "env-cmd -f .env.dev webpack serve --open --config ./build/dev.config.js"
+    "start": "env-cmd -f .env.dev webpack serve --open --config ./build/dev.config.js",
+    "serve":"serve -s dist"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",

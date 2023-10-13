@@ -13,7 +13,7 @@ const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 const CssMinimizerWebpackPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = merge(base, {
-  mode: "production",
+  mode: "production", // 生产模式,会开启tree-shaking和压缩代码,以及其他优化
   devtool: "source-map",
   module: {
     rules: [],
