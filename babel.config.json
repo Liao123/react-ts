@@ -12,7 +12,13 @@
     "@babel/preset-typescript" //转ts
   ],
   "plugins": [
-    ["@babel/plugin-proposal-decorators", { "legacy": true }]
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "es",
+      // "style": "css" // 或 "less"，取决于你的项目
+      "style": true
+    }]
   ]
   // "compact": true
 }

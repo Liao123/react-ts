@@ -11,6 +11,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 //压缩css
 const CssMinimizerWebpackPlugin = require("css-minimizer-webpack-plugin");
+//css 抽离文件
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = merge(base, {
   mode: "production", // 生产模式,会开启tree-shaking和压缩代码,以及其他优化
@@ -45,34 +47,47 @@ module.exports = merge(base, {
         react: {
           // 优先级
           priority: 20,
-          test: /[\\/]node_modules[\\/](react|react-router-dom|react-redux|react-dom)[\\/]/,
+          test: /[\\/]node_modules[\\/](react|react-router-dom|react-redux|react-dom)[\\/]/, // 单独打一个包
           name: "react",
           chunks: "all",
         },
         //公共js
-        default: {
-          name: "common",
-          chunks: "initial",
-          minChunks: 2, //模块被引用2次以上的才抽离
-          priority: -20,
-          reuseExistingChunk: true,
-        },
+        // default: {
+        //   name: "common",
+        //   chunks: "all",
+        //   minChunks: 2, //模块被引用2次以上的才抽离
+        //   priority: -20,
+        //   reuseExistingChunk: true,
+        // },
         vendors: {
-          //拆分第三方库（通过npm|yarn安装的库）
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendor",
-          chunks: "initial",
-          priority: -10,
+          // 提取node_modules代码
+          test: /node_modules/, // 只匹配node_modules里面的模块
+          name: "vendors", // 提取文件命名为vendors,js后缀和chunkhash会自动加
+          minChunks: 1, // 只要使用一次就提取出来
+          chunks: "initial", // 只提取初始化就能获取到的模块,不管异步的
+          minSize: 0, // 提取代码体积大于0就提取出来
+          priority: 1, // 提取优先级为1
+        },
+        commons: {
+          // 提取页面公共代码
+          name: "commons", // 提取文件命名为commons
+          minChunks: 2, // 只要使用两次就提取出来
+          chunks: "initial", // 只提取初始化就能获取到的模块,不管异步的
+          minSize: 0, // 提取代码体积大于0就提取出来
         },
       },
     },
     usedExports: true, //Tree Shaking 只导出使用的模块
     minimize: true,
     minimizer: [
+      //压缩js
       new TerserPlugin({
+        parallel: true, // 开启多线程压缩
         terserOptions: {
           // cache: true,
           compress: {
+            // 删除console.log
+            pure_funcs: ["console.log"],
             // 去除打印
             drop_console: true,
             // 去除debugger
@@ -125,6 +140,9 @@ module.exports = merge(base, {
           to: path.resolve(__dirname, "../dist/static"),
         },
       ],
+    }),
+    new MiniCssExtractPlugin({
+      filename: "static/css/[name].[contenthash:8].css", // 加上[contenthash:8]
     }),
     new CssMinimizerWebpackPlugin(),
   ],

@@ -1,15 +1,16 @@
 const path = require("path");
-const devMode = process.env.NODE_ENV !== "production";
+// const isDev = process.env.NODE_ENV !== "production";
+const isDev = true//process.env.NODE_ENV === "development"; // 是否是开发模式
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+console.log(process.env.NODE_ENV, "ev");
 //css抽离于独立文件
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 module.exports = {
   entry: path.resolve(__dirname, "../src/index.tsx"),
   output: {
     path: path.resolve(__dirname, "../dist"),
-    filename: "js/[name]_[fullhash:8].js", //webpack5 用fullhash了
-    chunkFilename: "js/[name]_[fullhash:8].js",
+    filename: "js/[name]_[fullhash:8].js", //构建过程中的任何更改时都会发生变化
+    chunkFilename: "js/[name]_[chunkhash:8].js", //在其内容发生变化时发生变化，而不会影响主要文件的名称
     clean: true, //webpack5 输出前清除不需要插件了
   },
   resolve: {
@@ -31,7 +32,7 @@ module.exports = {
         test: /.(css|less)$/,
         include: [path.resolve(__dirname, "../src")],
         use: [
-          devMode ? "style-loader" : "style-loader", //MiniCssExtractPlugin.loader,
+          isDev ? "style-loader" : MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
           "less-loader",
@@ -46,12 +47,15 @@ module.exports = {
           },
         },
         generator: {
-          filename: "static/img/[name][ext]", // 文件输出目录和命名
+          filename: "static/images/[name].[contenthash:8][ext]", // 加上[contenthash:8]
         },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
+        generator: {
+          filename: "static/fonts/[name].[contenthash:8][ext]", // 加上[contenthash:8]
+        },
       },
       {
         test: /\.(csv|tsv)$/i,
@@ -70,7 +74,7 @@ module.exports = {
           },
         },
         generator: {
-          filename: "static/media/[name][ext]", // 文件输出目录和命名
+          filename: "static/media/[name].[contenthash:8][ext]", // 加上[contenthash:8]
         },
       },
     ],
