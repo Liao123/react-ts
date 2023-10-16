@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./index.less";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { slice1Actions } from "@/store/counter/store1";
+import { Button } from "antd";
 export interface Props {
   enthusiasmLevel?: number;
 }
 
 function Car({ enthusiasmLevel = 1 }: Props) {
+  const navigate = useNavigate();
   const count = useSelector((state: any) => {
     return state.slice1.value;
   });
@@ -16,6 +18,10 @@ function Car({ enthusiasmLevel = 1 }: Props) {
   useEffect(() => {
     console.log(11121122121, process.env.NODE_ENV);
   });
+
+  const goHello = () => {
+    navigate("/hello?a=1");
+  };
 
   if (enthusiasmLevel <= 0) {
     throw new Error("You co222uld be a little more enthusiastic. :D");
@@ -32,7 +38,7 @@ function Car({ enthusiasmLevel = 1 }: Props) {
         <nav>
           <ul>
             <li>
-              <Link to={`/hello`}>去hello</Link>
+              <Button onClick={goHello}>car去hello</Button>
             </li>
             <li>
               <a href={`/contacts/2`}>Your Friend</a>

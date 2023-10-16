@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./index.less";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useSearchParams } from "react-router-dom";
 import { DatePicker, Space, Button, Row } from "antd";
 export interface Props {
   enthusiasmLevel?: number;
 }
 
 function Hello({ enthusiasmLevel = 1 }: Props) {
+  let [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     console.log(11121122121, process.env.NODE_ENV);
     console.log("NODE_ENV", process.env.NODE_ENV);
@@ -19,7 +20,7 @@ function Hello({ enthusiasmLevel = 1 }: Props) {
   return (
     <div className="hello">
       <div className="greeting color-red">
-        Hello {getExclamationMarks(enthusiasmLevel)}
+        Hello {searchParams.get("a")} {getExclamationMarks(enthusiasmLevel)}
         <Outlet />
         <Row></Row>
         <Button type="primary">Button</Button>
