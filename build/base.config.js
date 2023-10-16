@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 console.log(process.env.NODE_ENV, "ev");
 //css抽离于独立文件
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+//替换antd的moment为dayjs
+const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
 module.exports = {
   entry: path.resolve(__dirname, "../src/index.tsx"),
   output: {
@@ -87,10 +89,7 @@ module.exports = {
       inject: "body", //选择打包的js插入的标签
       inject: true, //自动注入静态资源
     }),
-    // new MiniCssExtractPlugin({
-    //   //抽离css
-    //   filename: "index.bundle.css", // 输出的 css 文件名为 index.css
-    // }),
+    new AntdDayjsWebpackPlugin(),
   ],
   cache: {
     type: "filesystem", // 使用文件缓存
