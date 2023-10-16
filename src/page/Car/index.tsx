@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./index.less";
 import { Link, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "@/store/counter/counterSlice";
+import { slice1Actions } from "@/store/counter/store1";
 export interface Props {
   enthusiasmLevel?: number;
 }
 
 function Car({ enthusiasmLevel = 1 }: Props) {
   const count = useSelector((state: any) => {
-    return state.value;
+    return state.slice1.value;
   });
   const dispatch = useDispatch();
 
@@ -40,14 +40,14 @@ function Car({ enthusiasmLevel = 1 }: Props) {
           </ul>
           <button
             aria-label="Increment value"
-            onClick={() => dispatch(increment())}
+            onClick={() => dispatch(slice1Actions.increment(1))}
           >
             Increment
           </button>
           <span>{count}</span>
           <button
             aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
+            onClick={() => dispatch(slice1Actions.decrement(2))}
           >
             Decrement
           </button>
