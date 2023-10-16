@@ -1,6 +1,6 @@
 const path = require("path");
 // const isDev = process.env.NODE_ENV !== "production";
-const isDev = true//process.env.NODE_ENV === "development"; // 是否是开发模式
+const isDev = process.env.NODE_ENV === "development"; // 是否是开发模式
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 console.log(process.env.NODE_ENV, "ev");
 //css抽离于独立文件
