@@ -7,11 +7,11 @@
   "author": "liaolongfei",
   "license": "MIT",
   "scripts": {
-    "build-t": "tsc",
-    "build:analy": "env-cmd -f .env.pro webpack --config ./build/analy.config.js",
-    "build": "env-cmd -f .env.pro webpack --config ./build/pro.config.js",
-    "start": "env-cmd -f .env.dev webpack serve --open --config ./build/dev.config.js",
-    "serve": "serve -s dist"
+    "build-t": "my-scripts start",
+    "build:analy": "my-scripts build:analy",
+    "build": "my-scripts build",
+    "start": "my-scripts start",
+    "serve": "my-scripts serve"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
@@ -34,6 +34,7 @@
     "less": "^4.1.3",
     "less-loader": "^11.1.0",
     "mini-css-extract-plugin": "^2.6.1",
+    "my-scripts": "^1.3.0",
     "progress-bar-webpack-plugin": "^2.1.0",
     "react-refresh": "^0.14.0",
     "speed-measure-webpack-plugin": "^1.5.0",
