@@ -1,0 +1,24 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env", //转es
+      {
+        "useBuiltIns": "usage",//表示按需引入 polyfill。Babel 会根据代码中实际使用的 ECMAScript 特性，自动检测需要的 polyfill
+        "debug": false,
+        "corejs": { "version": "3.8", "proposals": true }//core-js 是用于提供 ECMAScript 新特性的 polyfill 的库，添加proposals: true来实现提案中的特性 
+      }
+    ],
+    "@babel/preset-react", //转tsx
+    "@babel/preset-typescript" //转ts
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "es",
+      // "style": "css" // 或 "less"，取决于你的项目
+      "style": true
+    }]
+  ]
+  // "compact": true
+}
