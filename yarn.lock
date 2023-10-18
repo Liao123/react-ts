@@ -3899,10 +3899,10 @@ multicast-dns@^7.2.5:
     dns-packet "^5.2.2"
     thunky "^1.0.2"
 
-my-scripts@^1.3.0:
-  version "1.3.0"
-  resolved "http://localhost:4873/my-scripts/-/my-scripts-1.3.0.tgz#256febc3e82c198e971883291e20a3e037742ef2"
-  integrity sha512-6yAzjfKLWrBqXpqy4oAC85J2d/Mf043MguZglFpVdQcZG3Y2lbQYRgykYVF7Wy4caJQyM79KiiZGqltKDx88bw==
+my-scripts@^1.3.2:
+  version "1.3.2"
+  resolved "http://localhost:4873/my-scripts/-/my-scripts-1.3.2.tgz#b35c48290d24ab48200442e97f0ecce7ccbe1f79"
+  integrity sha512-6H37aiLiiptfmdySJ0IweD8E2rifsXmnMlafBVprsNr9dUHpuxMJp9QpRup7lN15xfodW6DQVD6Wj9X4Y9JfZg==
   dependencies:
     "@babel/core" "^7.19.0"
     "@babel/plugin-proposal-decorators" "^7.23.2"
