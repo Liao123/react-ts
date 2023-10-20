@@ -11,10 +11,11 @@
     "build:analy": "my-scripts build:analy",
     "build": "my-scripts build",
     "start": "my-scripts start",
-    "serve": "my-scripts serve"
+    "serve": "my-scripts serve",
+    "start:vite": "my-scripts start:vite"
   },
   "devDependencies": {
-    "my-scripts": "^0.0.6",
+    "my-scripts": "^0.0.8",
     "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.9.1",
     "webpack-cdn-plugin": "^3.3.1",
