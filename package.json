@@ -12,7 +12,7 @@
     "build": "env-cmd -f .env.pro webpack --config ./build/pro.config.js",
     "start": "env-cmd -f .env.dev webpack serve --open --config ./build/dev.config.js",
     "serve": "serve -s dist",
-    "start:vite": "vite"
+    "vite": "vite"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
@@ -38,6 +38,7 @@
     "less-loader": "^11.1.0",
     "mini-css-extract-plugin": "^2.6.1",
     "postcss-loader": "^7.3.3",
+    "postcss-preset-env": "^9.2.0",
     "progress-bar-webpack-plugin": "^2.1.0",
     "react-refresh": "^0.14.0",
     "speed-measure-webpack-plugin": "^1.5.0",
@@ -45,6 +46,8 @@
     "terser-webpack-plugin": "^5.3.6",
     "thread-loader": "^4.0.2",
     "vite": "^4.5.0",
+    "vite-plugin-commonjs": "^0.10.0",
+    "vite-plugin-html": "^3.2.0",
     "webpack": "^5.74.0",
     "webpack-bundle-analyzer": "^4.9.1",
     "webpack-cdn-plugin": "^3.3.1",

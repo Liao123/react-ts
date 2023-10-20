@@ -2,8 +2,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import route from "@/router";
 import React, { Suspense } from "react";
-import Hello from "./page/Hello";
-import Car from "./page/Car";
 
 const router = createBrowserRouter([...route], {
   basename: "/", //域名后面接什么文件夹（不是根目录）
